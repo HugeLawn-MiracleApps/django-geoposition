@@ -17,7 +17,7 @@ if (jQuery != undefined) {
         }
 
         var mapDefaults = {
-            'mapTypeId': google.maps.MapTypeId.ROADMAP,
+            'mapTypeId': google.maps.MapTypeId.HYBRID,
             'scrollwheel': false,
             'streetViewControl': false,
             'panControl': false
@@ -142,7 +142,7 @@ if (jQuery != undefined) {
             } else {
                 mapOptions['zoom'] = zoom;
             }
-            
+
 
             map = new google.maps.Map($mapContainer.get(0), mapOptions);
             markerOptions = $.extend({}, markerDefaults, markerCustomOptions, {
@@ -183,7 +183,14 @@ if (jQuery != undefined) {
                 map.setZoom(15);
                 marker.setPosition(center);
                 doGeocode();
+                google.maps.event.trigger(map , 'resize'); //UFFE try to get map to draw
             });
+
+            //UFFE try to get map to draw
+            google.maps.event.addListener(map, 'idle', function(){
+                google.maps.event.trigger(map , 'resize');
+            });
+
             // If there is no value yet, try to read from current location
             if(isNotSet()) {
                 if(mapOptions['center_on_current'] || markerOptions['position_on_current']) {

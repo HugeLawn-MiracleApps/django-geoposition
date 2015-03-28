@@ -6,6 +6,7 @@
     position: relative;
     margin: 6px 0;
     clear: both;
+    width: 300px;
 }
 
 .geoposition-widget table {
@@ -66,5 +67,5 @@
 }
 
 .gmnoprint img {
-    max-width: none; 
+    max-width: none;
 }
